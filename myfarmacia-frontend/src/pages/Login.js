@@ -1,36 +1,31 @@
-// src/pages/Login.js
+// src/components/Login.js
+import React, { useState } from 'react';
+import { loginUser } from '../api/userApi';
 
-import React, { useState, useContext } from 'react';
-import GlobalContext from '../context/GlobalState';
+const Login = ({ setUser }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const { setUser } = useContext(GlobalContext);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await loginUser({ email, password });
+      setUser(data.user);
+      localStorage.setItem('token', data.token);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // Aquí se haría una solicitud a la API para autenticar al usuario
-        // Una vez autenticado, llamamos a setUser para actualizar el estado global
-    };
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit">Login</button>
-        </form>
-    );
+  return (
+    <form onSubmit={handleLogin}>
+      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
+      <button type="submit">Login</button>
+      {error && <p>{error}</p>}
+    </form>
+  );
 };
 
 export default Login;
