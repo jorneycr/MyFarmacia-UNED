@@ -3,10 +3,10 @@ import React, { useContext, useEffect } from 'react';
 import GlobalContext from '../context/GlobalState';
 
 const ProductList = () => {
-  const { products, fetchProducts, addToCart } = useContext(GlobalContext);
+  const { products, fetchProductsData, addToCart } = useContext(GlobalContext);
 
   useEffect(() => {
-    fetchProducts();
+    fetchProductsData();
   }, []);
 
   return (
