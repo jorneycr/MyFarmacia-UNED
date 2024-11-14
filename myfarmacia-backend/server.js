@@ -1,40 +1,70 @@
-// require('dotenv').config();
-// const express = require('express');
-// const path = require('path');
-// const connectDB = require('./config/db');
-
-// const app = express();
-// connectDB();
-
-// app.use(express.json());
-// app.use('/api/products', require('./routes/productRoutes'));
-// app.use('/api/users', require('./routes/userRoutes'));
-// app.use('/api/orders', require('./routes/orderRoutes'));
-
-// // Serve static frontend
-// app.use(express.static(path.join(__dirname, '../myfarmacia-frontend/build')));
-// app.get('*', (req, res) => {
-//    res.sendFile(path.join(__dirname, '../myfarmacia-frontend/build', 'index.html'));
-// });
-
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 const express = require('express');
-const connectDB = require('./config/db');
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const https = require('https');
+const fs = require('fs'); // Importa el módulo fs
+const path = require('path');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+require("dotenv").config({ path: "./.env.development" });
 
+//cors permite que un cliente se conecte a otro servidor para el intercambio de recursos
+const cors = require("cors");
+
+//crear servidor
 const app = express();
-connectDB();
 
 app.use(express.json());
+
+// Conectar a MongoDB Atlas
+mongoose.connect(process.env.CONNECTION_STRING).then(() => {
+  console.log('Conectado a MongoDB');
+}).catch(err => {
+  console.error('Error al conectar a MongoDB:', err);
+});
+
+//habilitar bodyParser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// const corsOptions = {
+//   origin: [process.env.FRONTEND_URL_PROD, process.env.FRONTEND_URL_DEV],
+//   methods: 'GET,HEAD,POST',
+//   credentials: true,
+//   optionsSuccessStatus: 204
+// };
+
+// app.use(cors(corsOptions));
+app.use(cors());
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Servir archivos estáticos
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 
+// Configura la ruta principal para redirigir a index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+});
+
+// Configura opciones SSL usando los archivos del certificado de Open SSL
+// const options = {
+//    key: fs.readFileSync(path.join(__dirname, 'server.key')),
+//    cert: fs.readFileSync(path.join(__dirname, 'server.cert'))
+//  };
+
+
+// Configura opciones SSL usando los nuevos archivos de certificados de mkcert
+const options = {
+  key: fs.readFileSync(path.join(__dirname, 'localhost-key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, 'localhost.pem'))
+};
+
+// Inicia el servidor HTTPS
+const PORT = process.env.PORT || 5000;
+https.createServer(options, app).listen(PORT, () => {
+  console.log(`Servidor HTTPS corriendo en https://localhost:${PORT}`);
+});
