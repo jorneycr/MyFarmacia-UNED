@@ -1,4 +1,24 @@
 const Product = require('../models/Product');
+const dataProducts = require('../data/initialProducts.js');
+
+exports.addProducts = async (req, res) => {
+  try {
+    for (const product of dataProducts) {
+      const newProduct = new Product(product);
+
+      try {
+        await newProduct.save();
+      } catch (error) {
+        console.error(`Error al agregar el producto: ${newProduct.name}`, error.message);
+      }
+    }
+
+    return res.status(200).json({ mensaje: 'Todos los productos han sido importados exitosamente.' });
+  } catch (error) {
+    console.error('Error al importar los productos:', error.message);
+    return res.status(500).json({ error: 'Ocurrió un error al importar los productos.' });
+  }
+};
 
 // Crear un nuevo producto
 exports.createProduct = async (req, res) => {

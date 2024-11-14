@@ -2,8 +2,9 @@ const express = require('express');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const https = require('https');
-const fs = require('fs'); // Importa el módulo fs
+const fs = require('fs');
 const path = require('path');
+const helmet = require('helmet');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
@@ -42,26 +43,27 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 
-// Servir archivos estáticos
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+// Servir archivos estáticos con restricciones
+// app.use(express.static(path.join(__dirname, 'frontend/build'), {
+//   dotfiles: 'deny',    // Impide el acceso a archivos ocultos (ej., .env)
+//   index: false         // Deshabilita la generación de índices de directorio
+// }));
 
 // Configura la ruta principal para redirigir a index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
-});
-
-// Configura opciones SSL usando los archivos del certificado de Open SSL
-// const options = {
-//    key: fs.readFileSync(path.join(__dirname, 'server.key')),
-//    cert: fs.readFileSync(path.join(__dirname, 'server.cert'))
-//  };
-
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+// });
 
 // Configura opciones SSL usando los nuevos archivos de certificados de mkcert
 const options = {
   key: fs.readFileSync(path.join(__dirname, 'localhost-key.pem')),
-  cert: fs.readFileSync(path.join(__dirname, 'localhost.pem'))
+  cert: fs.readFileSync(path.join(__dirname, 'localhost.pem')),
+  //Deshabilitar Protocolos Inseguros (TLS 1.0 y 1.1)
+  secureProtocol: 'TLSv1_2_method'
 };
+
+// Configurar Headers de Seguridad
+app.use(helmet());
 
 // Inicia el servidor HTTPS
 const PORT = process.env.PORT || 5000;
