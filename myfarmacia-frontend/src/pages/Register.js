@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { registerUser } from '../api/userApi';
 
 const Register = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -20,7 +21,7 @@ const Register = () => {
         }
 
         try {
-            const response = await registerUser({ email, password });
+            const response = await registerUser({ name, email, password });
             setSuccessMessage("Registro exitoso. Por favor, inicia sesión.");
             setError('');
         } catch (err) {
@@ -30,6 +31,13 @@ const Register = () => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <input
+                type="name"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+            />
             <input
                 type="email"
                 placeholder="Email"
