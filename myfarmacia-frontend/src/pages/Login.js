@@ -1,8 +1,11 @@
 // src/components/Login.js
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { loginUser } from '../api/userApi';
+import GlobalContext from '../context/GlobalState';
 
-const Login = ({ setUser }) => {
+
+const Login = () => {
+  const { login } = useContext(GlobalContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -10,9 +13,9 @@ const Login = ({ setUser }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await loginUser({ email, password });
-      setUser(data.user);
-      localStorage.setItem('token', data.token);
+      //const data = await loginUser({ email, password });
+      //localStorage.setItem('token', data.token);
+      login({ email, password });
     } catch (err) {
       setError(err.message);
     }

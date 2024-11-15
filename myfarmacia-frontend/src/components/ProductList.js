@@ -3,11 +3,13 @@ import React, { useContext, useEffect } from 'react';
 import GlobalContext from '../context/GlobalState';
 
 const ProductList = () => {
-  const { products, fetchProductsData, addToCart } = useContext(GlobalContext);
+  const { cart, products, fetchProductsData, addToCart } = useContext(GlobalContext);
 
   useEffect(() => {
     fetchProductsData();
   }, []);
+
+  const isInCart = (productId) => cart.some((item) => item._id === productId);
 
   return (
     <div>
@@ -16,7 +18,12 @@ const ProductList = () => {
         <div key={product._id}>
           <h3>{product.name}</h3>
           <p>${product.price}</p>
-          <button onClick={() => addToCart(product)}>Add to Cart</button>
+          <button
+            onClick={() => addToCart(product)}
+            disabled={isInCart(product._id)}
+          >
+            {isInCart(product._id) ? 'In Cart' : 'Add to Cart'}
+          </button>
         </div>
       ))}
     </div>
