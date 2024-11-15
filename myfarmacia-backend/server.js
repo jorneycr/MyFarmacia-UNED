@@ -44,15 +44,15 @@ app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 
 // Servir archivos estáticos con restricciones
-// app.use(express.static(path.join(__dirname, 'frontend/build'), {
-//   dotfiles: 'deny',    // Impide el acceso a archivos ocultos (ej., .env)
-//   index: false         // Deshabilita la generación de índices de directorio
-// }));
+app.use(express.static(path.join(__dirname, 'frontend/build'), {
+  dotfiles: 'deny',    // Impide el acceso a archivos ocultos (ej., .env)
+  index: false         // Deshabilita la generación de índices de directorio
+}));
 
 // Configura la ruta principal para redirigir a index.html
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+});
 
 // Configura opciones SSL usando los nuevos archivos de certificados de mkcert
 const options = {
