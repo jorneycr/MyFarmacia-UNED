@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import { registerUser, loginUser } from '../api/userApi';
 import { createOrder, getUserOrders } from '../api/orderApi';
-import { fetchProducts, fetchProductById } from '../api/productApi';
+import { fetchProducts } from '../api/productApi';
 
 const initialState = {
     products: [],
@@ -17,10 +17,26 @@ const globalReducer = (state, action) => {
     switch (action.type) {
         case 'SET_PRODUCTS':
             return { ...state, products: action.payload };
-        case 'ADD_TO_CART':
+        case 'ADD_TO_CART': {
+            const existingItem = state.cart.find(item => item.productId === action.payload.productId);
+            if (existingItem) {
+                // Incrementar cantidad si ya está en el carrito
+                return {
+                    ...state,
+                    cart: state.cart.map(item =>
+                        item.productId === action.payload.productId
+                            ? { ...item, quantity: item.quantity + action.payload.quantity }
+                            : item
+                    ),
+                };
+            }
+            // Agregar nuevo producto al carrito
             return { ...state, cart: [...state.cart, action.payload] };
+        }
         case 'REMOVE_FROM_CART':
             return { ...state, cart: state.cart.filter(item => item._id !== action.payload) };
+        case 'REMOVE_CART':  // Nueva acción para vaciar el carrito
+            return { ...state, cart: [] };  // Vaciar el carrito
         case 'SET_USER':
             return { ...state, user: action.payload };
         case 'SET_ORDERS':
@@ -47,12 +63,17 @@ const GlobalProvider = ({ children }) => {
         }
     };
 
-    const addToCart = (product) => {
-        dispatch({ type: 'ADD_TO_CART', payload: product });
+    const addToCart = (product, quantity) => {
+        const payload = { productId: product._id, quantity };
+        dispatch({ type: 'ADD_TO_CART', payload });
     };
 
     const removeFromCart = (id) => {
         dispatch({ type: 'REMOVE_FROM_CART', payload: id });
+    };
+
+    const removeCart = () => {
+        dispatch({ type: 'REMOVE_CART' });
     };
 
     const register = async (userData) => {
@@ -82,9 +103,9 @@ const GlobalProvider = ({ children }) => {
         dispatch({ type: 'LOGOUT' });
     };
 
-    const fetchUserOrders = async () => {
+    const fetchUserOrders = async (userId) => {
         try {
-            const orders = await getUserOrders();
+            const orders = await getUserOrders(userId);
             dispatch({ type: 'SET_ORDERS', payload: orders });
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: 'Error al cargar las órdenes del usuario' });
@@ -97,8 +118,7 @@ const GlobalProvider = ({ children }) => {
             if (!token) {
                 throw new Error('Please login to create an order.');
             }
-            const newOrder = await createOrder(orderData, token);
-            fetchUserOrders(); // Actualiza la lista de órdenes
+            await createOrder(orderData, token);
             dispatch({ type: 'SET_ERROR', payload: null });
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: 'Error al crear la orden' });
@@ -116,6 +136,7 @@ const GlobalProvider = ({ children }) => {
                 fetchProductsData,
                 addToCart,
                 removeFromCart,
+                removeCart,
                 register,
                 login,
                 logout,

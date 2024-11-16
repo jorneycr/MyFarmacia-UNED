@@ -4,14 +4,15 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { GlobalProvider } from './context/GlobalState';
-import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
+import Ordenes from './components/Ordenes';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
-import Login from './pages/Login';
-import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE);
 
@@ -28,7 +29,8 @@ function App() {
                         <Route path="/product/:id" element={<ProductDetail />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
-
+                        <Route path="/ordenes" element={<Ordenes />} />
+                        
                         {/* Rutas protegidas */}
                         <Route
                             path="/cart"

@@ -1,9 +1,11 @@
 // src/components/Login.js
 import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../context/GlobalState';
 
 
 const Login = () => {
+  const navigate = useNavigate();
   const { login } = useContext(GlobalContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,6 +17,7 @@ const Login = () => {
       //const data = await loginUser({ email, password });
       //localStorage.setItem('token', data.token);
       login({ email, password });
+      navigate('/products');
     } catch (err) {
       setError(err.message);
     }

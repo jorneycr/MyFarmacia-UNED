@@ -1,0 +1,11 @@
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3MzZkMTNkMDQzMTY4ZTViYjI1ZTAzMiIsImlhdCI6MTczMTcyODc4MSwiZXhwIjoxNzMxNzMyMzgxfQ.PuTDyS3x4m4EZpDMqwefOKhGhHt4OVJdxsdjRkxIFsM",
+    "user":{
+       "_id":"6736d13d043168e5bb25e032",
+       "name":"Daniel",
+       "email":"jorney95@live.com",
+       "password":"$2b$10$kB8OEVf2f8FJqgSCiKzOAuiLb/BlkM0gJYL/g9MqGvmrAZp6X.A.S",
+       "role":"customer",
+       "__v":0
+    }
+ }

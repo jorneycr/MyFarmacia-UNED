@@ -15,9 +15,9 @@ export const createOrder = async (orderData) => {
   }
 };
 
-export const getUserOrders = async () => {
+export const getUserOrders = async (user) => {
   try {
-    const response = await axios.get(API_URL, {
+    const response = await axios.post('https://localhost:5000/api/orders/orders', {user}, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
     return response.data;

@@ -12,6 +12,7 @@ const Navbar = () => {
             <Link to="/products">Products</Link>
             {user ? (
                 <>
+                    <Link to="/ordenes">Ordenes</Link>
                     <Link to="/cart">Cart</Link>
                     <Link to="/checkout">Checkout</Link>
                     <button onClick={logout}>Logout</button>

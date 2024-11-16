@@ -1,0 +1,22 @@
+[
+    {
+       "_id":"673618ee0fc372f76e2ebb8c",
+       "name":"Ibuprofeno 400mg",
+       "description":"Anti-inflamatorio no esteroide para aliviar el dolor y la fiebre.",
+       "price":5.99,
+       "stock":100,
+       "category":"Analgésicos",
+       "imageUrl":"http://example.com/ibuprofeno.jpg",
+       "__v":0
+    },
+    {
+       "_id":"673618ee0fc372f76e2ebb8e",
+       "name":"Paracetamol 500mg",
+       "description":"Alivia el dolor leve y la fiebre.",
+       "price":3.99,
+       "stock":200,
+       "category":"Analgésicos",
+       "imageUrl":"http://example.com/paracetamol.jpg",
+       "__v":0
+    }
+ ]
