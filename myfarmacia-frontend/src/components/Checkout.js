@@ -87,8 +87,9 @@ const Checkout = () => {
             <h2>Checkout</h2>
             <p>Total: ${totalPrice}</p>
             <form onSubmit={handleSubmit}>
-                <CardElement />
-                <button type="submit" disabled={!stripe || isProcessing}>
+                {totalPrice > 0 && (<CardElement />)}
+                
+                <button type="submit" disabled={!stripe || isProcessing || totalPrice < 1}>
                     {isProcessing ? 'Processing...' : 'Pay Now'}
                 </button>
             </form>
