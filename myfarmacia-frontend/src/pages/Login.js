@@ -1,6 +1,5 @@
 // src/components/Login.js
 import React, { useState, useContext } from 'react';
-import { loginUser } from '../api/userApi';
 import GlobalContext from '../context/GlobalState';
 
 

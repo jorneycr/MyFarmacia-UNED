@@ -93,8 +93,12 @@ const GlobalProvider = ({ children }) => {
 
     const createNewOrder = async (orderData) => {
         try {
-            const newOrder = await createOrder(orderData);
-            fetchUserOrders(); // Refresca la lista de órdenes
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error('Please login to create an order.');
+            }
+            const newOrder = await createOrder(orderData, token);
+            fetchUserOrders(); // Actualiza la lista de órdenes
             dispatch({ type: 'SET_ERROR', payload: null });
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: 'Error al crear la orden' });

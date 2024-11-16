@@ -21,7 +21,7 @@ const Register = () => {
         }
 
         try {
-            const response = await registerUser({ name, email, password });
+            await registerUser({ name, email, password });
             setSuccessMessage("Registro exitoso. Por favor, inicia sesión.");
             setError('');
         } catch (err) {

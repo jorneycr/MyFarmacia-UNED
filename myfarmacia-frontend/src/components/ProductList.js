@@ -7,7 +7,7 @@ const ProductList = () => {
 
   useEffect(() => {
     fetchProductsData();
-  }, []);
+  }, [fetchProductsData]);
 
   const isInCart = (productId) => cart.some((item) => item._id === productId);
 

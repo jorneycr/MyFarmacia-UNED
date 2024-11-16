@@ -9,7 +9,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     fetchProductById(id);
-  }, [id]);
+  }, [id, fetchProductById]);
 
   if (!selectedProduct) return <p>Loading...</p>;
 
