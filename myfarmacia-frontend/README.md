@@ -31,6 +31,10 @@ Inicia el servidor del backend y asegúrate de que el endpoint /api/create-payme
 Usa el número de tarjeta de prueba de Stripe: 4242 4242 4242 4242.
 Usa cualquier fecha de vencimiento y CVC válidos.
 Completa el pago y verifica que el estado exitoso aparezca en el frontend.
+Número de tarjeta: 4242 4242 4242 4242
+Fecha de vencimiento: 12/34
+CVC: 123
+
 
 ## Postman
 

@@ -1,0 +1,31 @@
+{
+    "id": "pi_3QLbcHE95fxc4lVL1WCzJTap",
+    "object": "payment_intent",
+    "amount": 998,
+    "amount_details": {
+        "tip": {}
+    },
+    "automatic_payment_methods": null,
+    "canceled_at": null,
+    "cancellation_reason": null,
+    "capture_method": "automatic_async",
+    "client_secret": "pi_3QLbcHE95fxc4lVL1WCzJTap_secret_Qv3hHiPs2Fb1rG06EChUrdbyQ",
+    "confirmation_method": "automatic",
+    "created": 1731723605,
+    "currency": "usd",
+    "description": null,
+    "last_payment_error": null,
+    "livemode": false,
+    "next_action": null,
+    "payment_method": "pm_1QLbcHE95fxc4lVLQvebsO9K",
+    "payment_method_configuration_details": null,
+    "payment_method_types": [
+        "card"
+    ],
+    "processing": null,
+    "receipt_email": null,
+    "setup_future_usage": null,
+    "shipping": null,
+    "source": null,
+    "status": "succeeded"
+}
