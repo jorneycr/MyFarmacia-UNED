@@ -8,8 +8,9 @@ const orderSchema = new mongoose.Schema({
             quantity: { type: Number, required: true }
         }
     ],
+    transactionId: { type: String, required: true },
     total: { type: Number, required: true },
-    status: { type: String, enum: ['pending', 'completed', 'canceled'], default: 'pending' }
+    status: { type: String, enum: ['completed', 'canceled'], default: 'completed' }
 });
 
 module.exports = mongoose.model('Order', orderSchema);

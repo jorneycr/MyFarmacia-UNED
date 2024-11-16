@@ -14,6 +14,7 @@ exports.registerUser = async (req, res) => {
 
         res.status(201).json({ message: "Usuario registrado" });
     } catch (error) {
+        console.error({error: error.message});
         res.status(500).json({ error: error.message });
     }
 };
@@ -34,6 +35,7 @@ exports.loginUser = async (req, res) => {
         const token = jwt.sign({ id: user._id }, 'LLAVESECRETA', { expiresIn: '1h' });
         res.json({ token, user });
     } catch (error) {
+        console.error({error: error.message});
         res.status(500).json({ error: error.message });
     }
 };

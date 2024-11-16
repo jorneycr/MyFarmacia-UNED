@@ -6,6 +6,6 @@ const auth = require('../middleware/auth');  // Middleware para verificar autent
 // router.post('/', auth, createOrder);
 // router.get('/', auth, getUserOrders);
 router.post('/', createOrder);
-router.get('/', getUserOrders);
+router.post('/orders', getUserOrders);
 
 module.exports = router;

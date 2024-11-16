@@ -27,6 +27,7 @@ exports.createProduct = async (req, res) => {
         await product.save();
         res.status(201).json(product);
     } catch (error) {
+        console.error({error: error.message});
         res.status(400).json({ error: error.message });
     }
 };
@@ -37,6 +38,7 @@ exports.getProducts = async (req, res) => {
         const products = await Product.find();
         res.json(products);
     } catch (error) {
+        console.error({error: error.message});
         res.status(500).json({ error: error.message });
     }
 };
@@ -48,6 +50,7 @@ exports.getProductById = async (req, res) => {
         if (!product) return res.status(404).json({ message: "Producto no encontrado" });
         res.json(product);
     } catch (error) {
+        console.error({error: error.message});
         res.status(500).json({ error: error.message });
     }
 };
@@ -59,6 +62,7 @@ exports.updateProduct = async (req, res) => {
         if (!product) return res.status(404).json({ message: "Producto no encontrado" });
         res.json(product);
     } catch (error) {
+        console.error({error: error.message});
         res.status(400).json({ error: error.message });
     }
 };
@@ -70,6 +74,7 @@ exports.deleteProduct = async (req, res) => {
         if (!product) return res.status(404).json({ message: "Producto no encontrado" });
         res.json({ message: "Producto eliminado" });
     } catch (error) {
+        console.error({error: error.message});
         res.status(500).json({ error: error.message });
     }
 };
