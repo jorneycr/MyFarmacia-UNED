@@ -19,6 +19,7 @@
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.1",
-    "myfarmacia-backend": "file:"
+    "myfarmacia-backend": "file:",
+    "stripe": "^17.3.1"
   }
 }

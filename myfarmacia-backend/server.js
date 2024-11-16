@@ -5,6 +5,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const helmet = require('helmet');
+const Stripe = require('stripe');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
@@ -42,6 +43,25 @@ app.use(cors());
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+
+const stripe = Stripe(process.env.SECRET_STRIPE); // Clave secreta de Stripe
+
+app.post('/api/create-payment-intent', async (req, res) => {
+  try {
+    const { amount } = req.body;
+
+    // Crear un PaymentIntent
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: 'usd',
+      payment_method_types: ['card'],
+    });
+
+    res.send({ clientSecret: paymentIntent.client_secret });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // Servir archivos estáticos con restricciones
 app.use(express.static(path.join(__dirname, 'frontend/build'), {
