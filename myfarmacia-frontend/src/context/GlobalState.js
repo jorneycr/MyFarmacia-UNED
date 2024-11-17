@@ -120,8 +120,9 @@ const GlobalProvider = ({ children }) => {
             if (!token) {
                 throw new Error('Please login to create an order.');
             }
-            await createOrder(orderData, token);
+            const data = await createOrder(orderData, token);
             dispatch({ type: 'SET_ERROR', payload: null });
+            return data;
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: 'Error al crear la orden' });
         }

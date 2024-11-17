@@ -9,7 +9,6 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
-import ProductDetail from './components/ProductDetail';
 import Ordenes from './components/Ordenes';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
@@ -39,7 +38,6 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/products" element={<ProductList />} />
-                        <Route path="/product/:id" element={<ProductDetail />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/ordenes" element={<Ordenes />} />

@@ -1,5 +1,6 @@
 // src/components/Checkout.js
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../context/GlobalState';
@@ -26,13 +27,14 @@ const Checkout = () => {
         event.preventDefault();
         setIsProcessing(true);
 
-        if (!stripe || !elements) {
-            setError("Stripe no está completamente cargado.");
-            setIsProcessing(false);
-            return;
-        }
+        // if (!stripe || !elements) {
+        //     toast.error("Stripe no está completamente cargado.");
+        //     //setError("Stripe no está completamente cargado.");
+        //     setIsProcessing(false);
+        //     return;
+        // }
 
-        const cardElement = elements.getElement(CardElement);
+        // const cardElement = elements.getElement(CardElement);
 
         try {
             // const response = await fetch('https://localhost:5000/api/create-payment-intent', {
@@ -43,7 +45,6 @@ const Checkout = () => {
 
             // const { clientSecret } = await response.json();
 
-            // Confirmar el pago con el PaymentIntent
             // const result = await stripe.confirmCardPayment(clientSecret, {
             //     payment_method: {
             //         card: cardElement,
@@ -54,14 +55,20 @@ const Checkout = () => {
             // });
 
             // if (result.error) {
-            //     throw new Error(result.error.message);
+            //     toast.error("Hubo un error al realizar el pago");
+            //     //throw new Error(result.error.message);
             // }
 
             // if (result.paymentIntent.status === 'succeeded') {
-                //console.log('Pago exitoso:', result.paymentIntent);
                 setSuccess(true);
+                const products = cart.map(item => ({
+                    productId: item.productId,
+                    quantity: item.quantity,
+                }));
+                
+                console.log(JSON.stringify(products));
 
-                createNewOrder({
+                const data = createNewOrder({
                     userId: user.user._id,
                     products: cart.map(item => ({
                         productId: item.productId,
@@ -71,9 +78,15 @@ const Checkout = () => {
                     transactionId: "123",
                     total: totalPrice.toFixed(2),
                 });
-                removeCart();
 
-                navigate('/ordenes');
+                if (data === undefined) {
+                    toast.error("Hubo un error al crear el pedido");
+                } else {
+                    toast.success("Pago y creación de pedido exitoso");
+                    removeCart();
+                    navigate('/ordenes');
+                }
+
             // }
         } catch (err) {
             setError(err.message);
@@ -85,10 +98,10 @@ const Checkout = () => {
     return (
         <div>
             <h2>Checkout</h2>
-            <p>Total: ${totalPrice}</p>
+            <p>Total: ${totalPrice.toFixed(2)}</p>
             <form onSubmit={handleSubmit}>
                 {totalPrice > 0 && (<CardElement />)}
-                
+
                 <button type="submit" disabled={!stripe || isProcessing || totalPrice < 1}>
                     {isProcessing ? 'Processing...' : 'Pay Now'}
                 </button>

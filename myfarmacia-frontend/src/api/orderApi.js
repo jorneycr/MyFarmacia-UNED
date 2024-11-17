@@ -11,7 +11,6 @@ export const createOrder = async (orderData) => {
     return response.data;
   } catch (error) {
     console.error("Error creating order:", error);
-    throw error;
   }
 };
 
@@ -23,6 +22,5 @@ export const getUserOrders = async (user) => {
     return response.data;
   } catch (error) {
     console.error("Error fetching user orders:", error);
-    throw error;
   }
 };

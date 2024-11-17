@@ -5,7 +5,7 @@ import GlobalContext from '../context/GlobalState';
 
 const Navbar = () => {
     const { user, logout } = useContext(GlobalContext);
-
+    
     return (
         <nav>
             <Link to="/">Home</Link>
@@ -15,7 +15,8 @@ const Navbar = () => {
                     <Link to="/ordenes">Ordenes</Link>
                     <Link to="/cart">Cart</Link>
                     <Link to="/checkout">Checkout</Link>
-                    <button onClick={logout}>Logout</button>
+
+                    <button onClick={logout}>{user.user.name} Logout</button>
                 </>
             ) : (
                 <>

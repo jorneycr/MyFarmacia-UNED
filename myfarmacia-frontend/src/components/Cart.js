@@ -18,10 +18,11 @@ const Cart = () => {
                 price: product.price,
                 stock: product.stock,
                 category: product.category,
+                quantity: item.quantity
             };
         }
-
-        return null;  // En caso de que no se encuentre el producto
+        console.log(product)
+        return null;
     }).filter(item => item !== null);
 
     return (
@@ -33,6 +34,7 @@ const Cart = () => {
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
                     <p>Price: ${item.price}</p>
+                    <p>Cantidad: ${item.quantity}</p>
                     <button onClick={() => removeFromCart(item.productId)}>Remove</button>
                 </div>
             ))}

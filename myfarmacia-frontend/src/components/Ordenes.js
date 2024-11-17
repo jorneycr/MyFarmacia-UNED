@@ -17,7 +17,6 @@ const OrdenItem = ({ order, products }) => {
         <div className="order-item">
             <h3>Orden ID: {order._id}</h3>
             <p><strong>Total:</strong> ${order.total.toFixed(2)}</p>
-            <p><strong>Estado:</strong> {order.status}</p>
             {matchedProducts.length > 0 && (
                 <>
                     <h4>Productos:</h4>
@@ -27,7 +26,6 @@ const OrdenItem = ({ order, products }) => {
                                 <p><strong>Nombre:</strong> {product.details.name}</p>
                                 <p><strong>Precio:</strong> ${product.details.price}</p>
                                 <p><strong>Descripción:</strong> {product.details.description}</p>
-                                <p><strong>Categoría:</strong> {product.details.category}</p>
                                 <p><strong>Cantidad:</strong> {product.quantity}</p>
                             </li>
                         ))}
@@ -48,7 +46,7 @@ const Ordenes = () => {
         if (user) {
             fetchUserOrders(user.user._id).finally(() => setLoading(false));
         }
-    }, []);
+    }, [orders]);
 
     if (loading) {
         return <p>Cargando órdenes...</p>;
