@@ -1,0 +1,20 @@
+.orders-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.orders-container h1 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.loading-message,
+.empty-message {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #777;
+    font-weight: bold;
+}

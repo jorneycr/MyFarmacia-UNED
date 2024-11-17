@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../context/GlobalState';
+import './Checkout.css'; // Importa tu archivo CSS
 
 const Checkout = () => {
     const { user, cart, removeCart, products, createNewOrder } = useContext(GlobalContext);
@@ -66,8 +67,6 @@ const Checkout = () => {
                     quantity: item.quantity,
                 }));
                 
-                console.log(JSON.stringify(products));
-
                 const data = createNewOrder({
                     userId: user.user._id,
                     products: cart.map(item => ({
@@ -96,16 +95,30 @@ const Checkout = () => {
     };
 
     return (
-        <div>
-            <h2>Checkout</h2>
-            <p>Total: ${totalPrice.toFixed(2)}</p>
-            <form onSubmit={handleSubmit}>
-                {totalPrice > 0 && (<CardElement />)}
+        <div className="checkout-container">
+            <h2 className="checkout-title">Checkout</h2>
+            <div className="checkout-summary">
+                <p><strong>Total:</strong> ${totalPrice.toFixed(2)}</p>
+            </div>
 
-                <button type="submit" disabled={!stripe || isProcessing || totalPrice < 1}>
+            <form onSubmit={handleSubmit} className="checkout-form">
+                {totalPrice > 0 && (
+                    <div className="card-element-container">
+                        <CardElement className="card-element" />
+                    </div>
+                )}
+
+                <button 
+                    type="submit" 
+                    className="checkout-button" 
+                    disabled={!stripe || isProcessing || totalPrice < 1}
+                >
                     {isProcessing ? 'Procesando...' : 'Pagar'}
                 </button>
             </form>
+
+            {error && <div className="error-message">{error}</div>}
+            {success && <div className="success-message">¡Tu pago fue exitoso!</div>}
         </div>
     );
 };

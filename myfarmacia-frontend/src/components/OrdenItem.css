@@ -1,0 +1,56 @@
+.order-item {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.order-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-header h3 {
+    font-size: 1.6rem;
+    color: #333;
+}
+
+.total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff5722;
+}
+
+.order-products {
+    margin-top: 20px;
+}
+
+.order-product {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-info h5 {
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.product-info p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+hr {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+}

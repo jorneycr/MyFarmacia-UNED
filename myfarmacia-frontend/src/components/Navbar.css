@@ -1,0 +1,80 @@
+/* Estilos básicos para el navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #eaeaea;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.1); /* Efecto de agrandamiento */
+    color: #007bff; /* Cambia el color cuando pasa el mouse */
+}
+
+.navbar-logo {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #555;
+    font-size: 1rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar-link:hover {
+    color: #007bff;
+    transform: translateY(-3px); /* Efecto de desplazamiento hacia arriba */
+}
+
+.navbar-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Efecto de agrandamiento */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Sombra suave */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .navbar-button {
+        width: 100%;
+        text-align: center;
+    }
+}

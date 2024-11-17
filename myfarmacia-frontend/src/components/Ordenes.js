@@ -1,42 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import GlobalContext from '../context/GlobalState';
-
-const OrdenItem = ({ order, products }) => {
-    const findProductById = (id) => {
-        return products.find(product => product._id === id);
-    };
-
-    const matchedProducts = order.products
-        .map(product => ({
-            ...product,
-            details: findProductById(product.productId),
-        }))
-        .filter(product => product.details); // Filtrar solo los que tienen detalles
-
-    return (
-        <div className="order-item">
-            <h3>Orden ID: {order._id}</h3>
-            <p><strong>Total:</strong> ${order.total.toFixed(2)}</p>
-            {matchedProducts.length > 0 && (
-                <>
-                    <h4>Productos:</h4>
-                    <ul>
-                        {matchedProducts.map(product => (
-                            <li key={product._id}>
-                                <p><strong>Nombre:</strong> {product.details.name}</p>
-                                <p><strong>Precio:</strong> ${product.details.price}</p>
-                                <p><strong>Descripción:</strong> {product.details.description}</p>
-                                <p><strong>Cantidad:</strong> {product.quantity}</p>
-                            </li>
-                        ))}
-                    </ul>
-                </>
-            )}
-            <hr />
-        </div>
-    );
-};
-
+import OrdenItem from './OrdenItem';
+import './Ordenes.css';
 
 const Ordenes = () => {
     const { orders, products, fetchUserOrders, user } = useContext(GlobalContext);
@@ -46,14 +11,14 @@ const Ordenes = () => {
         if (user) {
             fetchUserOrders(user.user._id).finally(() => setLoading(false));
         }
-    }, [orders]);
+    }, [user, fetchUserOrders]);
 
     if (loading) {
-        return <p>Cargando órdenes...</p>;
+        return <p className="loading-message">Cargando órdenes...</p>;
     }
 
     if (!orders || !orders.length) {
-        return <p>No hay órdenes disponibles.</p>;
+        return <p className="empty-message">No tienes órdenes disponibles.</p>;
     }
 
     return (
@@ -67,4 +32,3 @@ const Ordenes = () => {
 };
 
 export default Ordenes;
-

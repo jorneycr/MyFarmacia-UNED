@@ -1,10 +1,10 @@
-// src/pages/Home.js
 import React from 'react';
+import './Home.css'; // Importamos el archivo CSS
 
 const Home = () => (
-  <div>
-    <h1>Welcome to Our Store</h1>
-    <p>Explore our wide range of products!</p>
+  <div className="home-container">
+    <h1 className="home-title">Bienvenido a Nuestra Tienda</h1>
+    <p className="home-description">¡Explora nuestra amplia gama de productos!</p>
   </div>
 );
 

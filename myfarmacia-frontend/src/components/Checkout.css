@@ -1,0 +1,72 @@
+.checkout-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.checkout-summary {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-element-container {
+    margin-bottom: 20px;
+}
+
+.card-element {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.checkout-button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.checkout-button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.error-message, .success-message {
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.error-message {
+    background-color: #ffdddd;
+    color: #d8000c;
+}
+
+.success-message {
+    background-color: #ddffdd;
+    color: #4caf50;
+}

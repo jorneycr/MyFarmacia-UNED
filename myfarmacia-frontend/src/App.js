@@ -23,16 +23,21 @@ function App() {
         <GlobalProvider>
             <Router>
                 <Navbar />
-                <ToastContainer 
-                    position="top-right" 
-                    autoClose={3000} 
-                    hideProgressBar={false} 
-                    newestOnTop={false} 
-                    closeOnClick 
-                    rtl={false} 
-                    pauseOnFocusLoss 
-                    draggable 
-                    pauseOnHover 
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    style={{
+                        position: 'absolute',
+                        top: '62px',
+                        right: '0px',
+                    }}
                 />
                 <Elements stripe={stripePromise}>
                     <Routes>
@@ -41,7 +46,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/ordenes" element={<Ordenes />} />
-                        
+
                         {/* Rutas protegidas */}
                         <Route
                             path="/cart"
