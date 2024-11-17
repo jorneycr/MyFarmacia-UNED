@@ -34,7 +34,7 @@ const globalReducer = (state, action) => {
             return { ...state, cart: [...state.cart, action.payload] };
         }
         case 'REMOVE_FROM_CART':
-            return { ...state, cart: state.cart.filter(item => item._id !== action.payload) };
+            return { ...state, cart: state.cart.filter(item => item.productId !== action.payload) };
         case 'REMOVE_CART':  // Nueva acción para vaciar el carrito
             return { ...state, cart: [] };  // Vaciar el carrito
         case 'SET_USER':
@@ -69,6 +69,7 @@ const GlobalProvider = ({ children }) => {
     };
 
     const removeFromCart = (id) => {
+        console.log(id);
         dispatch({ type: 'REMOVE_FROM_CART', payload: id });
     };
 
@@ -103,6 +104,7 @@ const GlobalProvider = ({ children }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         dispatch({ type: 'LOGOUT' });
+        
     };
 
     const fetchUserOrders = async (userId) => {

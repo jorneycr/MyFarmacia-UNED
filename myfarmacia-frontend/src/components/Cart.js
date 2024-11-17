@@ -1,5 +1,6 @@
 // src/components/Cart.js
 import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
 import GlobalContext from '../context/GlobalState';
 
 const Cart = () => {
@@ -25,17 +26,27 @@ const Cart = () => {
         return null;
     }).filter(item => item !== null);
 
+    const handleRemoveCart = () => {
+        removeCart();
+        toast.success("Productos elimanados del carrito");
+    };
+
+    const handleRemoveFromCart = (productId) => {
+        removeFromCart(productId);
+        toast.success("Producto elimanado de mi carrito");
+    };
+
     return (
         <div>
             <h2>Tu carrito</h2>
-            <button onClick={() => removeCart()}>Vaciar el carrito</button>
+            <button onClick={() => handleRemoveCart()}>Vaciar el carrito</button>
             {cartList.map(item => (
                 <div key={item.productId}>
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
                     <p>Price: ${item.price}</p>
                     <p>Cantidad: ${item.quantity}</p>
-                    <button onClick={() => removeFromCart(item.productId)}>Remove</button>
+                    <button onClick={() => handleRemoveFromCart(item.productId)}>Eliminar</button>
                 </div>
             ))}
         </div>

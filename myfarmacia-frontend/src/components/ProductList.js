@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import GlobalContext from '../context/GlobalState';
 
 const ProductList = () => {
@@ -15,9 +16,14 @@ const ProductList = () => {
         setQuantities({ ...quantities, [productId]: Number(value) });
     };
 
+    const handleAddToCart = (product, quantity) => {
+        addToCart(product, quantity);
+        toast.success("Producto agregado al carrito");
+    };
+
     return (
         <div>
-            <h2>Product List</h2>
+            <h2>Lista de Productos</h2>
             {products.map((product) => (
                 <div key={product._id}>
                     <h3>{product.name}</h3>
@@ -30,10 +36,10 @@ const ProductList = () => {
                         disabled={isInCart(product._id)}
                     />
                     <button
-                        onClick={() => addToCart(product, quantities[product._id] || 1)}
+                        onClick={() => handleAddToCart(product, quantities[product._id] || 1)}
                         disabled={isInCart(product._id)}
                     >
-                        {isInCart(product._id) ? 'In Cart' : 'Add to Cart'}
+                        {isInCart(product._id) ? 'En Carrito' : 'Agregar al Carrito'}
                     </button>
                 </div>
             ))}

@@ -103,11 +103,9 @@ const Checkout = () => {
                 {totalPrice > 0 && (<CardElement />)}
 
                 <button type="submit" disabled={!stripe || isProcessing || totalPrice < 1}>
-                    {isProcessing ? 'Processing...' : 'Pay Now'}
+                    {isProcessing ? 'Procesando...' : 'Pagar'}
                 </button>
             </form>
-            {error && <div style={{ color: 'red' }}>{error}</div>}
-            {success && <div style={{ color: 'green' }}>Payment Successful!</div>}
         </div>
     );
 };
