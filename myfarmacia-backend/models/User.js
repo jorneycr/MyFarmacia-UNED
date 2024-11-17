@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
     role: { type: String, enum: ['customer', 'admin'], default: 'customer' }
 });
 
-// Hashing password before saving
 userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 10);

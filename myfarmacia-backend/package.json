@@ -21,5 +21,8 @@
     "mongoose": "^8.8.1",
     "myfarmacia-backend": "file:",
     "stripe": "^17.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }
