@@ -1,31 +1,37 @@
 // src/pages/Register.js
 
-import React, { useState } from 'react';
-import { registerUser } from '../api/userApi';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import GlobalContext from '../context/GlobalState';
 
 const Register = () => {
+    const navigate = useNavigate();
+    const { register } = useContext(GlobalContext);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // Validación de coincidencia de contraseñas
         if (password !== confirmPassword) {
-            setError("Las contraseñas no coinciden");
+            toast.error("Las contraseñas no coinciden");
             return;
         }
 
         try {
-            await registerUser({ name, email, password });
-            setSuccessMessage("Registro exitoso. Por favor, inicia sesión.");
-            setError('');
+            const data = await register({ name, email, password });
+            if(data === undefined){
+                toast.error("Error al registrar. Por favor, inténtelo nuevamente.");
+              }else{
+                toast.success("Registro exitoso. Por favor, inicia sesión.");
+                navigate('/login');
+              }
+            
         } catch (err) {
-            setError("Error al registrar. Por favor, inténtelo nuevamente.");
+            console.error("Error al registrar. Por favor, inténtelo nuevamente.");
         }
     };
 
@@ -60,8 +66,6 @@ const Register = () => {
                 required
             />
             <button type="submit">Register</button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
         </form>
     );
 };

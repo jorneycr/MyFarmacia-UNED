@@ -81,6 +81,7 @@ const GlobalProvider = ({ children }) => {
             const user = await registerUser(userData);
             dispatch({ type: 'SET_USER', payload: user });
             dispatch({ type: 'SET_ERROR', payload: null });
+            return user;
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: 'Error en el registro' });
         }
@@ -92,6 +93,7 @@ const GlobalProvider = ({ children }) => {
             localStorage.setItem('token', user.token);
             dispatch({ type: 'SET_USER', payload: user });
             dispatch({ type: 'SET_ERROR', payload: null });
+            return user;
         } catch (error) {
             dispatch({ type: 'SET_ERROR', payload: 'Error al iniciar sesión' });
         }

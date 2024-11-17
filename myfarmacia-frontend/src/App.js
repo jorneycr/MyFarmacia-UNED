@@ -14,14 +14,27 @@ import Ordenes from './components/Ordenes';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import ProtectedRoute from './components/ProtectedRoute';
-const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE);
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE);
 
 function App() {
     return (
         <GlobalProvider>
             <Router>
                 <Navbar />
+                <ToastContainer 
+                    position="top-right" 
+                    autoClose={3000} 
+                    hideProgressBar={false} 
+                    newestOnTop={false} 
+                    closeOnClick 
+                    rtl={false} 
+                    pauseOnFocusLoss 
+                    draggable 
+                    pauseOnHover 
+                />
                 <Elements stripe={stripePromise}>
                     <Routes>
                         <Route path="/" element={<Home />} />
