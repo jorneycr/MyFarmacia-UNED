@@ -15,6 +15,7 @@ import Checkout from './components/Checkout';
 import ProtectedRoute from './components/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProductManager from './components/ProductManager';
 
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE);
 
@@ -45,7 +46,8 @@ function App() {
                         <Route path="/products" element={<ProductList />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
-                        <Route path="/ordenes" element={<Ordenes />} />
+                        <Route path="/ordenes" element={<ProtectedRoute><Ordenes /></ProtectedRoute>} />
+                        <Route path="/product-manager" element={<ProtectedRoute><ProductManager /></ProtectedRoute>} />
 
                         {/* Rutas protegidas */}
                         <Route
