@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import Swal from "sweetalert2";
+import { toast } from 'react-toastify';
 import GlobalContext from "../context/GlobalState";
 import {
   fetchProducts,
@@ -32,9 +34,15 @@ const ProductManager = () => {
     e.preventDefault();
     try {
       if (editingProduct) {
-        await updateProduct(editingProduct._id, formData);
+        const data = await updateProduct(editingProduct._id, formData);
+        if(data !== undefined){
+          toast.success("Producto actualizado!");
+        }
       } else {
-        await createProduct(formData);
+        const data = await createProduct(formData);
+        if(data !== undefined){
+          toast.success("Producto creado!");
+        }
       }
       fetchProductsData();
       setFormData({ name: "", price: "", category: "", description: "", stock: "" });
@@ -56,14 +64,27 @@ const ProductManager = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("¿Estás seguro de eliminar este producto?")) {
-      try {
-        await deleteProduct(id);
-        fetchProductsData();
-      } catch (error) {
-        console.error("Error al eliminar el producto:", error);
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción eliminará el producto y no se podrá deshacer.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteProduct(id);
+          fetchProductsData();
+          Swal.fire("Eliminado", "El producto ha sido eliminado con éxito.", "success");
+        } catch (error) {
+          console.error("Error al eliminar el producto:", error);
+          Swal.fire("Error", "No se pudo eliminar el producto. Intenta de nuevo.", "error");
+        }
       }
-    }
+    });
   };
 
   const handleCancelEdit = () => {
