@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import GlobalContext from '../context/GlobalState';
-import './FormStyles.css'; // Importa el CSS
+import '../styles/FormStyles.css';
 
 
 const Login = () => {

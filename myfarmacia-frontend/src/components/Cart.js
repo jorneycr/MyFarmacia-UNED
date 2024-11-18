@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import GlobalContext from '../context/GlobalState';
 import { Link } from 'react-router-dom';
-import './Cart.css';
+import '../styles/Cart.css';
 
 const Cart = () => {
     const { cart, products, removeFromCart, removeCart } = useContext(GlobalContext);

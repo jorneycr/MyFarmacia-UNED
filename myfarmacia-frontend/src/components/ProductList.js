@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import GlobalContext from '../context/GlobalState';
-import './ProductList.css';
+import '../styles/ProductList.css';
 import ProductModal from './ProductModal';
 
 

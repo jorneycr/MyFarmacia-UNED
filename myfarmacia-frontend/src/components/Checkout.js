@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../context/GlobalState';
-import './Checkout.css'; // Importa tu archivo CSS
+import '../styles/Checkout.css';
 
 const Checkout = () => {
     const { user, cart, removeCart, products, createNewOrder } = useContext(GlobalContext);
@@ -62,11 +62,7 @@ const Checkout = () => {
 
             // if (result.paymentIntent.status === 'succeeded') {
                 setSuccess(true);
-                const products = cart.map(item => ({
-                    productId: item.productId,
-                    quantity: item.quantity,
-                }));
-                
+                                
                 const data = createNewOrder({
                     userId: user.user._id,
                     products: cart.map(item => ({

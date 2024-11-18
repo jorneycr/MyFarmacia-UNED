@@ -1,5 +1,5 @@
 import React from 'react';
-import './ProductModal.css';
+import '../styles/ProductModal.css';
 
 const ProductModal = ({ product, closeModal }) => {
 

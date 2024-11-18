@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import GlobalContext from '../context/GlobalState';
-import './Navbar.css'; // Importa el archivo de estilos
+import '../styles/Navbar.css';
 
 const Navbar = () => {
     const { cart, user, logout } = useContext(GlobalContext);

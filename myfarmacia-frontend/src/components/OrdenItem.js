@@ -1,5 +1,5 @@
 import React from 'react';
-import './OrdenItem.css';
+import '../styles/OrdenItem.css';
 
 const OrdenItem = ({ order, products }) => {
     const findProductById = (id) => {

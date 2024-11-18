@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import GlobalContext from '../context/GlobalState';
 import OrdenItem from './OrdenItem';
-import './Ordenes.css';
+import '../styles/Ordenes.css';
 
 const Ordenes = () => {
     const { orders, products, fetchUserOrders, user } = useContext(GlobalContext);
