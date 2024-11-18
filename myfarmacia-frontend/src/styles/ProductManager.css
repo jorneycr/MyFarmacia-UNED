@@ -13,7 +13,6 @@
   color: #333;
 }
 
-/* Form */
 .product-form {
   background: white;
   padding: 20px;
@@ -65,7 +64,6 @@
   background-color: #dc3545;
 }
 
-/* Product List */
 .product-manager-list {
   list-style: none;
   padding: 0;

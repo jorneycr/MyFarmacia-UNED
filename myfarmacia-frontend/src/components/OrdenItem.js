@@ -36,7 +36,6 @@ const OrdenItem = ({ order, products }) => {
                     </ul>
                 </div>
             )}
-            <hr />
         </div>
     );
 };
