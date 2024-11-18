@@ -1,92 +1,114 @@
-/* Raíz del componente */
+/* ProductManager.css */
+
+/* Product Manager Container */
 .product-manager {
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 800px;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  .product-manager h1,
-  .product-manager h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .product-manager form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .product-manager input[type="text"],
-  .product-manager input[type="number"] {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .product-manager button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .product-manager button[type="submit"] {
-    background-color: #4caf50;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .product-manager button[type="button"] {
-    background-color: #f0ad4e;
-    color: white;
-  }
-  
-  .product-manager button:hover {
-    opacity: 0.9;
-  }
-  
-  .product-manager ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .product-manager li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background: #f9f9f9;
-  }
-  
-  .product-manager li button {
-    margin-left: 10px;
-  }
-  
-  .product-manager li button:first-of-type {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .product-manager li button:last-of-type {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .product-manager li button:hover {
-    opacity: 0.85;
-  }
-  
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.product-manager__title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form */
+.product-form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.product-form__group {
+  margin-bottom: 15px;
+}
+
+.product-form__label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.product-form__input,
+.product-form__textarea {
+  width: 97%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.product-form__textarea {
+  height: 80px;
+}
+
+.product-form__actions {
+  text-align: right;
+}
+
+.product-form__button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #007bff;
+  cursor: pointer;
+}
+
+.product-form__button--cancel {
+  background-color: #dc3545;
+}
+
+/* Product List */
+.product-manager-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 70%;
+}
+
+.product-list__item {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-list__info {
+  max-width: 70%;
+}
+
+.product-list__name {
+  font-weight: bold;
+}
+
+.product-list__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.product-list__button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.product-list__button--edit {
+  background-color: #28a745;
+}
+
+.product-list__button--delete {
+  background-color: #dc3545;
+}
