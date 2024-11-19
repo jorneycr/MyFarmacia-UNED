@@ -27,8 +27,8 @@ mongoose.connect(process.env.CONNECTION_STRING).then(() => {
 });
 
 //habilitar bodyParser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10kb' })); // Limita el tamaño de JSON a 10 KB
+app.use(express.urlencoded({ extended: true, limit: '10kb' })); // Limita el tamaño de datos codificados en URL
 
 const corsOptions = {
   origin: [process.env.FRONTEND_URL_DEV],
