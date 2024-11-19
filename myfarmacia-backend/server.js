@@ -30,15 +30,13 @@ mongoose.connect(process.env.CONNECTION_STRING).then(() => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// const corsOptions = {
-//   origin: [process.env.FRONTEND_URL_PROD, process.env.FRONTEND_URL_DEV],
-//   methods: 'GET,HEAD,POST',
-//   credentials: true,
-//   optionsSuccessStatus: 204
-// };
+const corsOptions = {
+  origin: [process.env.FRONTEND_URL_DEV],
+  methods: 'GET,HEAD,POST',
+  credentials: true
+};
 
-// app.use(cors(corsOptions));
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
