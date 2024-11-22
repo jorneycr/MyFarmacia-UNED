@@ -32,7 +32,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' })); // Limita el tam
 
 const corsOptions = {
   origin: [process.env.FRONTEND_URL_DEV],
-  methods: 'GET,HEAD,POST',
+  methods: 'GET,HEAD,POST,DELETE,PUT,PATCH',
   credentials: true
 };
 
