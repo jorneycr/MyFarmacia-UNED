@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
 import GlobalContext from '../context/GlobalState';
+import generateObjectId from '../helper';
 import '../styles/Checkout.css';
 
 const Checkout = () => {
@@ -11,6 +12,7 @@ const Checkout = () => {
     const navigate = useNavigate();
     const stripe = useStripe();
     const elements = useElements();
+    const id = generateObjectId();
 
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
@@ -70,7 +72,7 @@ const Checkout = () => {
                         quantity: item.quantity,
                     })),
                     // transactionId: result.paymentIntent.id,
-                    transactionId: "123",
+                    transactionId: id,
                     total: totalPrice.toFixed(2),
                 });
 
